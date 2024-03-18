@@ -85,35 +85,10 @@ colo = ["#282828", # background
         "#68948a", # blue
         "#ab6c7d"] # purple
 
-## SCREENS
-# To achieve a Powerline effect without installing anything additionally, you insert Unicode characters ("" and "") between the widgets.
-# Instead of copy-pasting the almost same lines over and over again, I used my limited Python skills to write this neat function.
-def pline(rl, fg, bg):
-    if rl == 0:
-        uc = ""
-    else:
-        uc = ""
-    return widget.TextBox(text = uc,
-                          padding = 0,
-                          fontsize = 22,
-                          foreground=fg,
-                          background=bg)
 
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", "mod1"],
-            f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
-    )
+#groups = [Group(i) for i in "123456789"]
 
-
-groups = [Group(i) for i in "123456789"]
+groups = [Group(i, label={"1": "", "2": "", "3": "", "4": "", "5": "", "6": "", "7": "?"}[i]) for i in "1234567"]
 
 for i in groups:
     keys.extend(
@@ -168,7 +143,25 @@ screens = [
         bottom=bar.Bar(
             [
                 widget.CurrentLayout(),
-                widget.GroupBox(),
+                widget.GroupBox(
+                    font="FontAwesome",
+                    fontsize=26,
+                    margin_y=3,
+                    margin_x=10,
+                    padding_y=5,
+                    padding_x=3,
+                    borderwidth=3,
+                    active="a9b665",
+                    inactive="888888",
+                    rounded=False,
+                    highlight_method="text",
+                    this_current_screen_border="d75f5f",
+                    this_screen_border="555555",
+                    other_current_screen_border="d75f5f",
+                    other_screen_border="555555",
+                    foreground="ffffff",
+                    background="282828"
+                ),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Chord(
@@ -224,6 +217,7 @@ screens = [
                 ),
             ],
             35,
+            background="282828",
         ),
     ),
 ]
