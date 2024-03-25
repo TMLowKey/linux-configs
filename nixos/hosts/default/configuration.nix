@@ -121,6 +121,9 @@
       starship
       tmux
       gitkraken
+      ranger
+      krita
+      imv
     ];
   };
   
