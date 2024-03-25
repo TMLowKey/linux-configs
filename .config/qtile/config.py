@@ -87,8 +87,9 @@ colo = ["#282828", # background
 
 
 #groups = [Group(i) for i in "123456789"]
+groups = [Group(i, label={"1": "", "2": "", "3": "", "4": "", "5": "", "6": "", "7": "?"}.get(i, "")) for i in "1234567"]
 
-groups = [Group(i, label={"1": "", "2": "", "3": "", "4": "", "5": "", "6": "", "7": "?"}[i]) for i in "1234567"]
+#groups = [Group(i, label={"1": "", "2": "", "3": "", "4": "", "5": "", "6": "", "7": "?"}[i]) for i in "1234567"]
 
 for i in groups:
     keys.extend(
@@ -199,7 +200,6 @@ screens = [
                     fontsize=23, 
                     background=colo[3]
                 ),
-                pline(1, colo[4], colo[3]),
                 widget.BatteryIcon(
                     background=colo[4]
                 ),
