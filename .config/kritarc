@@ -89,6 +89,16 @@ splitterState_1row=\x00\x00\x00\xff\x00\x00\x00\x01\x00\x00\x00\x02\xff\xff\xff\
 [OverviewDocker]
 pinControls=true
 
+[SelectedTags]
+gamutmasks=All
+gradients=All
+paintoppresets=All
+palettes=All
+patterns=All
+tasksets=All
+windowlayouts=All
+workspaces=All
+
 [SvgSymbolCollection]
 currentCollection=0
 

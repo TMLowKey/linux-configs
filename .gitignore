@@ -28,3 +28,11 @@
 .config/user-dirs.locale
 
 .config/qtile/__pycache__/
+
+.config/\@trezor/suite-desktop/Cache/Cache_Data/
+
+.config/\@trezor/suite-desktop/
+
+.config/QtProject.conf
+
+.config/QtProject/

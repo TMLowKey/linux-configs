@@ -1,0 +1,11 @@
+[urgency_low]
+    background = "#222222"
+    foreground = "#888888"
+
+[urgency_normal]
+background = "#222222"
+foreground = "#00FF00"  # Green text
+
+[urgency_critical]
+    background = "#900000"
+    foreground = "#ffffff"

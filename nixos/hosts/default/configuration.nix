@@ -124,6 +124,17 @@
       ranger
       krita
       imv
+      qtcreator
+      qt5.full
+      # Trezor
+      trezor-suite
+      trezord
+      trezorctl
+      trezor-agent
+      # Notification libraries
+      libnotify
+      dunst
+      acpi
     ];
   };
   
@@ -183,6 +194,38 @@ fonts.packages = with pkgs; [
     backend = "glx";
   };
 
+# Battery check service
+ systemd.services.myBatteryCheckService = {
+    description = "Check battery level and notify if low";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.python3}/bin/python3 /home/Scripts/check_battery.py";
+      User = "lowkey";
+    };
+  };
+
+ systemd.timers.myBatteryCheckTimer = {
+    description = "Timer for the battery check service";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5min"; # Wait 5 minutes after boot before first check
+      OnUnitActiveSec = "30min"; # Then check every 30 minutes
+    };
+  };
+
+# Trezor udev rules
+ services.udev = {
+  extraRules = ''
+    # Trezor
+    SUBSYSTEM=="usb", ATTR{idVendor}=="534c", ATTR{idProduct}=="0001", MODE="0660", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl", SYMLINK+="trezor%n"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="534c", ATTRS{idProduct}=="0001", MODE="0660", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl"
+
+    # Trezor v2
+    SUBSYSTEM=="usb", ATTR{idVendor}=="1209", ATTR{idProduct}=="53c0", MODE="0660", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl", SYMLINK+="trezor%n"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="1209", ATTR{idProduct}=="53c1", MODE="0660", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl", SYMLINK+="trezor%n"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="53c1", MODE="0660", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl"
+  '';
+};
 
 
   # Some programs need SUID wrappers, can be configured further or are
