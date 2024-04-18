@@ -10,8 +10,18 @@ return {
     local dap = require("dap")
     local dapui = require("dapui")
     
-
-    local path="~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+    dap.configurations.python = {
+      {
+        type = "python",
+        request = "launch",
+        name = "Launch file",
+        program = "${file}",
+        pythonPath = function()
+          return vim.fn.exepath("python")
+        end,
+      },
+    }
+    --local path="~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
     require("dap-python").setup(path)
     dapui.setup()
 

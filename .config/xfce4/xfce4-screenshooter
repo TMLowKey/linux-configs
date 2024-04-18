@@ -1,0 +1,13 @@
+app=imv-dir
+custom_action_command=/nix/store/zql5ig3qink40hl5j30mi11mgd4j9381-xfce4-screenshooter-1.10.5/libexec/xfce4/screenshooter/scripts/imgur-upload.sh %f %imgur_client_id
+last_user=
+last_extension=png
+enable_imgur_upload=true
+show_in_folder=false
+screenshot_dir=file:///home/lowkey/Pictures
+action=1
+delay=0
+region=1
+show_mouse=1
+show_border=1
+

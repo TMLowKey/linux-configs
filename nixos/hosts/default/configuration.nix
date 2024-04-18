@@ -124,8 +124,7 @@
       ranger
       krita
       imv
-      qtcreator
-      qt5.full
+      gnumake
       # Trezor
       trezor-suite
       trezord
@@ -135,6 +134,8 @@
       libnotify
       dunst
       acpi
+      # Screenshots
+      xfce.xfce4-screenshooter
     ];
   };
   
@@ -176,6 +177,7 @@ fonts.packages = with pkgs; [
    ll = "ls -l";
    ls = "ls --color=tty";
    rebuild-nix = "sudo nixos-rebuild switch --flake ~/etc/nixos/#default";
+   c = "clear";
  };
 
  # Editing bashrc
@@ -194,24 +196,6 @@ fonts.packages = with pkgs; [
     backend = "glx";
   };
 
-# Battery check service
- systemd.services.myBatteryCheckService = {
-    description = "Check battery level and notify if low";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.python3}/bin/python3 /home/Scripts/check_battery.py";
-      User = "lowkey";
-    };
-  };
-
- systemd.timers.myBatteryCheckTimer = {
-    description = "Timer for the battery check service";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnBootSec = "5min"; # Wait 5 minutes after boot before first check
-      OnUnitActiveSec = "30min"; # Then check every 30 minutes
-    };
-  };
 
 # Trezor udev rules
  services.udev = {
