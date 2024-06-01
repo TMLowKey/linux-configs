@@ -1,0 +1,5 @@
+import = ["~/.config/alacritty/rose-pine-moon.toml"]
+
+[font]
+normal = { family = "RobotoMono Nerd Font", style = "Regular" }
+size = 14.0
